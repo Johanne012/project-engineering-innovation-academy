@@ -1,0 +1,14 @@
+{
+  "name": "project-engineering-innovation-academy",
+  "shortName": "PEIA",
+  "titleAr": "أكاديمية هندسة المشاريع والابتكار",
+  "titleEn": "Project Engineering & Innovation Academy",
+  "version": "0.2.0",
+  "description": "Arabic-first open curriculum and digital academy for project engineering, innovation, software architecture, quality, cybersecurity, AI, and entrepreneurship.",
+  "site": "https://peia-academy.vercel.app/",
+  "repository": "https://github.com/Johanne012/project-engineering-innovation-academy",
+  "status": "initial-source-from-live-site",
+  "modules": 12,
+  "independentFrom": ["ZYNTRA"],
+  "license": "MIT"
+}
