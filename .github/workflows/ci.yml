@@ -1,0 +1,43 @@
+name: PEIA CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  structure-and-basic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f .gitignore
+          test -f project-manifest.json
+          test -f website/index.html
+          test -f website/style.css
+          test -f website/robots.txt
+          test -f website/sitemap.xml
+          test -d website/curriculum
+          test -d website/lessons/01
+          test -d website/youtube
+          echo "Required structure OK"
+
+      - name: Check no obvious secrets
+        run: |
+          if grep -rE '(api[_-]?key|secret|password|token)\s*[:=]\s*["\x27][^"\x27]+' --include='*.html' --include='*.js' --include='*.json' --include='*.md' --include='*.yml' . 2>/dev/null | grep -v 'example\|placeholder\|YOUR_' ; then
+            echo "Possible secrets found"
+            exit 1
+          else
+            echo "No obvious secrets"
+          fi
+
+      - name: Basic HTML presence
+        run: |
+          grep -q '<html' website/index.html
+          grep -q 'PEIA' website/index.html
+          echo "HTML basic checks OK"
